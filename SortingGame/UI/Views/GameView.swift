@@ -30,6 +30,13 @@ struct GameView: View {
             buttonBar
         }
         .padding()
+#if os(macOS)
+        .focusable()
+        .focusEffectDisabled()
+        .onKeyPress(phases: .down) { press in
+            viewModel.handleKey(press.key) ? .handled : .ignored
+        }
+#endif
     }
 
     private var buttonBar: some View {
