@@ -33,13 +33,25 @@ struct GameView: View {
             Text(viewModel.feedbackText)
                 .font(.title2)
                 .fontWeight(.semibold)
+                .id(viewModel.feedbackText)
+                .transition(.scale.combined(with: .opacity))
+                .animation(.spring(duration: 0.3), value: viewModel.feedbackText)
 
             buttonBar
         }
         .padding()
         .onChange(of: viewModel.engine.state) { _, newState in
             switch newState {
-            case .won, .gaveUp:
+            case .won:
+                // 先捕获快照，避免 sheet 活读引擎状态导致闪现
+                settlementState = newState
+                settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
+                scene.runCelebration()
+                Task {
+                    try? await Task.sleep(for: .seconds(1.2))
+                    showingSettlement = true
+                }
+            case .gaveUp:
                 settlementState = newState
                 settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 showingSettlement = true
