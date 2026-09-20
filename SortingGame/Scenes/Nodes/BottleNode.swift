@@ -72,8 +72,10 @@ class BottleNode: SKNode {
         markLabel?.alpha = marked ? 1 : 0
     }
 
+    /// 与 UI/BottleStyle 保持一致
     private static let shapeSymbols = ["●", "■", "▲", "◆", "★", "⬟", "✚"]
 
+    /// 与 UI/BottleStyle 保持一致
     private static func colorForIndex(_ index: Int) -> SKColor {
         let colors: [SKColor] = [.red, .blue, .green, .orange, .purple, .cyan, .yellow]
         return colors[index % colors.count]

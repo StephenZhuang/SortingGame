@@ -12,6 +12,13 @@ enum BottleStyle {
         let colors: [Color] = [.red, .blue, .green, .orange, .purple, .cyan, .yellow]
         return colors[index % colors.count]
     }
+
+    /// 与 BottleNode.symbolColor 一致：浅底（绿/橙/青/黄）用黑符号，深底用白符号
+    static func symbolColor(forIndex index: Int) -> Color {
+        // 对应 color(forIndex:) 色表 [.red, .blue, .green, .orange, .purple, .cyan, .yellow]
+        let colors: [Color] = [.white, .white, .black, .black, .white, .black, .black]
+        return colors[index % colors.count]
+    }
 }
 
 /// 结算界面用的瓶子圆形徽章
@@ -27,7 +34,7 @@ struct BottleChip: View {
                 .frame(width: 36, height: 36)
             Text(BottleStyle.shapeSymbol(forIndex: bottle.shapeIndex))
                 .font(.system(size: 16))
-                .foregroundStyle(.white)
+                .foregroundStyle(BottleStyle.symbolColor(forIndex: bottle.colorIndex))
         }
         .overlay {
             if let isCorrect {

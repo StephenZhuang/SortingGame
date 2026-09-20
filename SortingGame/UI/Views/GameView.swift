@@ -6,6 +6,8 @@ struct GameView: View {
     @State private var viewModel: GameViewModel
     @State private var scene: GameScene
     @State private var showingSettlement = false
+    @State private var settlementState: GameState = .preparing
+    @State private var settlementPlayerArray = BottleArray(bottles: [])
 #if os(macOS)
     @FocusState private var gameFocused: Bool
 #endif
@@ -38,6 +40,8 @@ struct GameView: View {
         .onChange(of: viewModel.engine.state) { _, newState in
             switch newState {
             case .won, .gaveUp:
+                settlementState = newState
+                settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 showingSettlement = true
             case .preparing, .playing:
                 break
@@ -45,8 +49,8 @@ struct GameView: View {
         }
         .sheet(isPresented: $showingSettlement) {
             SettlementView(
-                state: viewModel.engine.state,
-                playerArray: viewModel.engine.currentArray ?? BottleArray(bottles: []),
+                state: settlementState,
+                playerArray: settlementPlayerArray,
                 onPlayAgain: {
                     showingSettlement = false
                     viewModel.startNewGame()
@@ -69,6 +73,11 @@ struct GameView: View {
             viewModel.handleKey(press.key) ? .handled : .ignored
         }
         .onAppear { gameFocused = true }
+        .onChange(of: showingSettlement) { _, isShowing in
+            if !isShowing {
+                restoreFocus()
+            }
+        }
 #endif
     }
 
