@@ -1,0 +1,22 @@
+# macOS / Xcode
+.DS_Store
+*.swp
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+*.moved-aside
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# 证书与密钥（禁止入库）
+*.p12
+*.mobileprovision
+*.cer
+
+# Qoder 工具临时输出
+.qoder/better-harness/
+.qoder/repowiki/
