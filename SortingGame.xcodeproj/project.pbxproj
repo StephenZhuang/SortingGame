@@ -21,12 +21,29 @@
 			remoteGlobalIDString = 7767272C305FC75200445BE3;
 			remoteInfo = SortingGame;
 		};
+		7767279E305FCB2E00445BE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77672725305FC75200445BE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77672790305FCB2D00445BE3;
+			remoteInfo = "SortingGame-iOS";
+		};
+		776727A8305FCB2E00445BE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77672725305FC75200445BE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77672790305FCB2D00445BE3;
+			remoteInfo = "SortingGame-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7767272D305FC75200445BE3 /* SortingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7767273A305FC75300445BE3 /* SortingGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortingGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77672744305FC75300445BE3 /* SortingGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortingGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77672791305FCB2D00445BE3 /* SortingGame-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SortingGame-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7767279D305FCB2E00445BE3 /* SortingGame-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SortingGame-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		776727A7305FCB2E00445BE3 /* SortingGame-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SortingGame-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,6 +60,21 @@
 		77672747305FC75300445BE3 /* SortingGameUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SortingGameUITests;
+			sourceTree = "<group>";
+		};
+		77672792305FCB2D00445BE3 /* SortingGame-iOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SortingGame-iOS";
+			sourceTree = "<group>";
+		};
+		776727A0305FCB2E00445BE3 /* SortingGame-iOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SortingGame-iOSTests";
+			sourceTree = "<group>";
+		};
+		776727AA305FCB2E00445BE3 /* SortingGame-iOSUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SortingGame-iOSUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -63,6 +95,21 @@
 			files = (
 			);
 		};
+		7767278E305FCB2D00445BE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		7767279A305FCB2E00445BE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		776727A4305FCB2E00445BE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -72,6 +119,9 @@
 				7767272F305FC75200445BE3 /* SortingGame */,
 				7767273D305FC75300445BE3 /* SortingGameTests */,
 				77672747305FC75300445BE3 /* SortingGameUITests */,
+				77672792305FCB2D00445BE3 /* SortingGame-iOS */,
+				776727A0305FCB2E00445BE3 /* SortingGame-iOSTests */,
+				776727AA305FCB2E00445BE3 /* SortingGame-iOSUITests */,
 				7767272E305FC75200445BE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +132,9 @@
 				7767272D305FC75200445BE3 /* SortingGame.app */,
 				7767273A305FC75300445BE3 /* SortingGameTests.xctest */,
 				77672744305FC75300445BE3 /* SortingGameUITests.xctest */,
+				77672791305FCB2D00445BE3 /* SortingGame-iOS.app */,
+				7767279D305FCB2E00445BE3 /* SortingGame-iOSTests.xctest */,
+				776727A7305FCB2E00445BE3 /* SortingGame-iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +202,66 @@
 			productReference = 77672744305FC75300445BE3 /* SortingGameUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		77672790305FCB2D00445BE3 /* SortingGame-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 776727B3305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOS" */;
+			buildPhases = (
+				7767278D305FCB2D00445BE3 /* Sources */,
+				7767278E305FCB2D00445BE3 /* Frameworks */,
+				7767278F305FCB2D00445BE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				77672792305FCB2D00445BE3 /* SortingGame-iOS */,
+			);
+			name = "SortingGame-iOS";
+			productName = "SortingGame-iOS";
+			productReference = 77672791305FCB2D00445BE3 /* SortingGame-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7767279C305FCB2E00445BE3 /* SortingGame-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 776727B4305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOSTests" */;
+			buildPhases = (
+				77672799305FCB2E00445BE3 /* Sources */,
+				7767279A305FCB2E00445BE3 /* Frameworks */,
+				7767279B305FCB2E00445BE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7767279F305FCB2E00445BE3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				776727A0305FCB2E00445BE3 /* SortingGame-iOSTests */,
+			);
+			name = "SortingGame-iOSTests";
+			productName = "SortingGame-iOSTests";
+			productReference = 7767279D305FCB2E00445BE3 /* SortingGame-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		776727A6305FCB2E00445BE3 /* SortingGame-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 776727B5305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOSUITests" */;
+			buildPhases = (
+				776727A3305FCB2E00445BE3 /* Sources */,
+				776727A4305FCB2E00445BE3 /* Frameworks */,
+				776727A5305FCB2E00445BE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				776727A9305FCB2E00445BE3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				776727AA305FCB2E00445BE3 /* SortingGame-iOSUITests */,
+			);
+			name = "SortingGame-iOSUITests";
+			productName = "SortingGame-iOSUITests";
+			productReference = 776727A7305FCB2E00445BE3 /* SortingGame-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -170,6 +283,17 @@
 						CreatedOnToolsVersion = 27.0;
 						TestTargetID = 7767272C305FC75200445BE3;
 					};
+					77672790305FCB2D00445BE3 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					7767279C305FCB2E00445BE3 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 77672790305FCB2D00445BE3;
+					};
+					776727A6305FCB2E00445BE3 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 77672790305FCB2D00445BE3;
+					};
 				};
 			};
 			buildConfigurationList = 77672728305FC75200445BE3 /* Build configuration list for PBXProject "SortingGame" */;
@@ -189,6 +313,9 @@
 				7767272C305FC75200445BE3 /* SortingGame */,
 				77672739305FC75300445BE3 /* SortingGameTests */,
 				77672743305FC75300445BE3 /* SortingGameUITests */,
+				77672790305FCB2D00445BE3 /* SortingGame-iOS */,
+				7767279C305FCB2E00445BE3 /* SortingGame-iOSTests */,
+				776727A6305FCB2E00445BE3 /* SortingGame-iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,6 +332,21 @@
 			);
 		};
 		77672742305FC75300445BE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		7767278F305FCB2D00445BE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		7767279B305FCB2E00445BE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		776727A5305FCB2E00445BE3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -227,6 +369,21 @@
 			files = (
 			);
 		};
+		7767278D305FCB2D00445BE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		77672799305FCB2E00445BE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		776727A3305FCB2E00445BE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -239,6 +396,16 @@
 			isa = PBXTargetDependency;
 			target = 7767272C305FC75200445BE3 /* SortingGame */;
 			targetProxy = 77672745305FC75300445BE3 /* PBXContainerItemProxy */;
+		};
+		7767279F305FCB2E00445BE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77672790305FCB2D00445BE3 /* SortingGame-iOS */;
+			targetProxy = 7767279E305FCB2E00445BE3 /* PBXContainerItemProxy */;
+		};
+		776727A9305FCB2E00445BE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77672790305FCB2D00445BE3 /* SortingGame-iOS */;
+			targetProxy = 776727A8305FCB2E00445BE3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -507,6 +674,167 @@
 			};
 			name = Release;
 		};
+		776727AD305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOS" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		776727AE305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOS" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		776727AF305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOSTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SortingGame-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SortingGame-iOS";
+			};
+			name = Debug;
+		};
+		776727B0305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOSTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SortingGame-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SortingGame-iOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		776727B1305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOSUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SortingGame-iOS";
+			};
+			name = Debug;
+		};
+		776727B2305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOSUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9VJC84TY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onsoft.SortingGame-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SortingGame-iOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -539,6 +867,30 @@
 			buildConfigurations = (
 				77672753305FC75300445BE3 /* Debug configuration for PBXNativeTarget "SortingGameUITests" */,
 				77672754305FC75300445BE3 /* Release configuration for PBXNativeTarget "SortingGameUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		776727B3305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776727AD305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOS" */,
+				776727AE305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOS" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		776727B4305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776727AF305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOSTests" */,
+				776727B0305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOSTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		776727B5305FCB2E00445BE3 /* Build configuration list for PBXNativeTarget "SortingGame-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776727B1305FCB2E00445BE3 /* Debug configuration for PBXNativeTarget "SortingGame-iOSUITests" */,
+				776727B2305FCB2E00445BE3 /* Release configuration for PBXNativeTarget "SortingGame-iOSUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};
