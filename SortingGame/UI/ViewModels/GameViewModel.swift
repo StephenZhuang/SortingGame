@@ -20,6 +20,11 @@ class GameViewModel {
     func submitGuess() {
         engine.submitGuess()
         updateFeedback()
+        if case .won = engine.state {
+            SoundEffectPlayer.play(.win)
+        } else {
+            SoundEffectPlayer.play(.submit)
+        }
     }
 
     func giveUp() {

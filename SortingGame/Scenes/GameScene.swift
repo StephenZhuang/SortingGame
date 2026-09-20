@@ -51,6 +51,9 @@ final class GameScene: SKScene {
 
         let order = current.bottles.map(\.id)
         if order != renderedOrder {
+            if !renderedOrder.isEmpty {
+                SoundEffectPlayer.play(.swap)
+            }
             for (index, bottle) in current.bottles.enumerated() {
                 if let node = bottleNodes.first(where: { $0.bottleId == bottle.id }) {
                     let move = SKAction.move(to: boxNode.getSlotPosition(at: index), duration: 0.2)
