@@ -50,6 +50,7 @@ struct GameView: View {
         .sheet(isPresented: $showingSettlement) {
             SettlementView(
                 state: settlementState,
+                bottleCount: viewModel.engine.bottleCount,
                 playerArray: settlementPlayerArray,
                 onPlayAgain: {
                     showingSettlement = false

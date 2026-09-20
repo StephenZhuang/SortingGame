@@ -3,10 +3,14 @@ import SwiftUI
 /// 结算界面：胜利显示尝试次数，放弃显示答案对比
 struct SettlementView: View {
     let state: GameState
+    let bottleCount: Int
     let playerArray: BottleArray
     let onPlayAgain: () -> Void
     let onChangeDifficulty: () -> Void
     let onBackToMenu: () -> Void
+
+    @State private var savedRank: Int?
+    @State private var scoreSaved = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -39,6 +43,20 @@ struct SettlementView: View {
                 .bold()
             Text("尝试次数：\(attempts)")
                 .font(.title2)
+            if let savedRank {
+                Text("已记入 \(bottleCount) 瓶榜：第 \(savedRank) 名")
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .onAppear {
+            // 防止 sheet 重复触发 onAppear 造成重复写入
+            guard !scoreSaved else { return }
+            scoreSaved = true
+            savedRank = LeaderboardService.shared.addEntry(
+                bottleCount: bottleCount,
+                attempts: attempts,
+                playerName: SettingsService.shared.playerName
+            )
         }
     }
 
