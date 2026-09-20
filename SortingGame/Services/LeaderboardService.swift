@@ -33,12 +33,12 @@ final class LeaderboardService {
 
     /// 添加成绩，返回该难度榜内排名（1 起；未进 Top 10 返回 nil）
     @discardableResult
-    func addEntry(bottleCount: Int, attempts: Int, playerName: String) -> Int? {
+    func addEntry(bottleCount: Int, attempts: Int, playerName: String, completedAt: Date = Date()) -> Int? {
         let entry = LeaderboardEntry(
             id: UUID(),
             bottleCount: bottleCount,
             attempts: attempts,
-            completedAt: Date(),
+            completedAt: completedAt,
             playerName: playerName
         )
         entries.append(entry)

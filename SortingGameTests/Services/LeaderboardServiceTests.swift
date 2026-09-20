@@ -59,6 +59,37 @@ final class LeaderboardServiceTests: XCTestCase {
         XCTAssertNil(rank)
     }
 
+    func testLoadIgnoresCorruptedData() throws {
+        let url = makeStorageURL()
+        defer { try? FileManager.default.removeItem(at: url) }
+        try Data("not json".utf8).write(to: url)
+
+        let service = LeaderboardService(storageURL: url)
+        XCTAssertEqual(service.topEntries(bottleCount: 4), [])
+
+        // 损坏数据不影响后续写入，且能正常持久化
+        XCTAssertEqual(service.addEntry(bottleCount: 4, attempts: 3, playerName: "A"), 1)
+
+        let reloaded = LeaderboardService(storageURL: url)
+        XCTAssertEqual(reloaded.topEntries(bottleCount: 4).map(\.playerName), ["A"])
+    }
+
+    func testRankTieBreakByCompletedAt() {
+        let service = LeaderboardService(storageURL: makeStorageURL())
+        let earlier = Date(timeIntervalSince1970: 1_000)
+        let later = earlier.addingTimeInterval(60)
+
+        // 后添加但完成时间更早的记录应排在前面
+        let lateRankWhenAdded = service.addEntry(
+            bottleCount: 4, attempts: 5, playerName: "Late", completedAt: later)
+        let earlyRankWhenAdded = service.addEntry(
+            bottleCount: 4, attempts: 5, playerName: "Early", completedAt: earlier)
+
+        XCTAssertEqual(lateRankWhenAdded, 1)   // 添加时榜内仅有自己
+        XCTAssertEqual(earlyRankWhenAdded, 1)  // 完成更早，插入后即排第 1
+        XCTAssertEqual(service.topEntries(bottleCount: 4).map(\.playerName), ["Early", "Late"])
+    }
+
     func testPersistenceAcrossInstances() throws {
         let url = makeStorageURL()
         defer { try? FileManager.default.removeItem(at: url) }
