@@ -25,7 +25,10 @@ struct DifficultySelectView: View {
         }
         .padding()
         .sheet(isPresented: $showingGame) {
-            GameView(bottleCount: selectedBottleCount)
+            GameView(bottleCount: selectedBottleCount, onExitToMenu: {
+                showingGame = false
+                dismiss()
+            })
         }
     }
 
