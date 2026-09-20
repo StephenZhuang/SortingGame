@@ -9,8 +9,20 @@ struct SettlementView: View {
     let onChangeDifficulty: () -> Void
     let onBackToMenu: () -> Void
 
+#if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+#endif
     @State private var savedRank: Int?
     @State private var scoreSaved = false
+
+    /// iPhone 竖屏（compact）下不施加最小宽度，避免撑宽溢出；macOS 恒为 false
+    private var isCompact: Bool {
+#if os(iOS)
+        horizontalSizeClass == .compact
+#else
+        false
+#endif
+    }
 
     var body: some View {
         VStack(spacing: 20) {
@@ -33,7 +45,7 @@ struct SettlementView: View {
             }
         }
         .padding(24)
-        .frame(minWidth: 400)
+        .frame(minWidth: isCompact ? nil : 400)
     }
 
     private func wonContent(attempts: Int) -> some View {

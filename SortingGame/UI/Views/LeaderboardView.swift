@@ -3,8 +3,20 @@ import SwiftUI
 /// 排行榜：按瓶子数量分榜，显示 Top 10
 struct LeaderboardView: View {
     @Environment(\.dismiss) private var dismiss
+#if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+#endif
     @State private var selectedCount = 4
     private var service = LeaderboardService.shared
+
+    /// iPhone 竖屏（compact）下不施加最小尺寸，避免撑宽溢出；macOS 恒为 false
+    private var isCompact: Bool {
+#if os(iOS)
+        horizontalSizeClass == .compact
+#else
+        false
+#endif
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -27,7 +39,7 @@ struct LeaderboardView: View {
                 .buttonStyle(.bordered)
         }
         .padding(24)
-        .frame(minWidth: 440, minHeight: 420)
+        .frame(minWidth: isCompact ? nil : 440, minHeight: isCompact ? nil : 420)
     }
 
     @ViewBuilder
