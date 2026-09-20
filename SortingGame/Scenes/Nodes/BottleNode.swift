@@ -63,9 +63,9 @@ class BottleNode: SKNode {
         highlightRing.alpha = selected ? 1 : 0
     }
 
-    func toggleMark() {
-        isMarked.toggle()
-        markLabel?.alpha = isMarked ? 1 : 0
+    func setMarked(_ marked: Bool) {
+        isMarked = marked
+        markLabel?.alpha = marked ? 1 : 0
     }
 
     private static func colorForIndex(_ index: Int) -> SKColor {

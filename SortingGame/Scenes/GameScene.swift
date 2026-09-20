@@ -1,41 +1,69 @@
 import SpriteKit
-import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
-/// 游戏主场景
-class GameScene: SKScene {
+/// 游戏主场景：纯渲染 GameCore 状态，输入翻译为语义事件回传引擎
+final class GameScene: SKScene {
     private var engine: GameEngine!
     private var boxNode: BoxNode!
     private var bottleNodes: [BottleNode] = []
-    private var selectedBottleIndex: Int?
+    /// 上一帧已渲染的瓶子顺序（bottleId 列表），用于 diff 触发移动动画
+    private var renderedOrder: [Int] = []
 
-    var onStateChanged: ((GameState) -> Void)?
+    func configure(engine: GameEngine) {
+        self.engine = engine
+    }
 
     override func didMove(to view: SKView) {
         backgroundColor = .black
         setupGame()
     }
 
-    func configure(engine: GameEngine) {
-        self.engine = engine
-    }
-
     private func setupGame() {
-        guard let engine = engine,
-              let currentArray = engine.currentArray else { return }
+        removeAllChildren()
+        bottleNodes = []
+        renderedOrder = []
+        guard let engine, let currentArray = engine.currentArray else { return }
 
-        // 创建盒子
         let slotSize = CGSize(width: 80, height: 120)
         boxNode = BoxNode(slotCount: currentArray.count, slotSize: slotSize)
         boxNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(boxNode)
 
-        // 创建瓶子节点
         for (index, bottle) in currentArray.bottles.enumerated() {
-            let bottleNode = BottleNode(bottle: bottle, size: slotSize)
-            bottleNode.position = boxNode.getSlotPosition(at: index)
-            bottleNode.name = "bottle_\(index)"
-            addChild(bottleNode)
-            bottleNodes.append(bottleNode)
+            let node = BottleNode(bottle: bottle, size: slotSize)
+            node.position = boxNode.getSlotPosition(at: index)
+            boxNode.addChild(node)
+            bottleNodes.append(node)
+        }
+        renderedOrder = currentArray.bottles.map(\.id)
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        syncWithEngine()
+    }
+
+    /// 每帧 diff 引擎状态：位置变化播放移动动画，选中/标记直接同步
+    private func syncWithEngine() {
+        guard let engine, let current = engine.currentArray else { return }
+
+        let order = current.bottles.map(\.id)
+        if order != renderedOrder {
+            for (index, bottle) in current.bottles.enumerated() {
+                if let node = bottleNodes.first(where: { $0.bottleId == bottle.id }) {
+                    let move = SKAction.move(to: boxNode.getSlotPosition(at: index), duration: 0.2)
+                    move.timingMode = .easeInEaseOut
+                    node.run(move, withKey: "moveToSlot")
+                }
+            }
+            renderedOrder = order
+        }
+
+        for node in bottleNodes {
+            let position = current.bottles.firstIndex(where: { $0.id == node.bottleId }) ?? -1
+            node.setSelected(engine.selectedPosition == position)
+            node.setMarked(engine.markedPositions.contains(position))
         }
     }
 
@@ -51,49 +79,28 @@ class GameScene: SKScene {
     #endif
 
     private func handleTap(at location: CGPoint) {
+        guard let engine, engine.state == .playing else { return }
         let tappedNode = atPoint(location)
 
-        // 查找点击的瓶子
-        for (index, bottleNode) in bottleNodes.enumerated() {
-            if tappedNode == bottleNode || tappedNode.parent == bottleNode {
-                handleBottleTap(at: index)
+        for node in bottleNodes {
+            // 命中瓶体/高光/选中环/标记等任意子节点都算点中该瓶子
+            if tappedNode == node || tappedNode.parent == node || tappedNode.parent?.parent == node {
+                if let position = engine.currentArray?.bottles.firstIndex(where: { $0.id == node.bottleId }) {
+                    engine.tap(position: position)
+                }
                 return
             }
         }
     }
 
-    private func handleBottleTap(at index: Int) {
-        if let selectedIndex = selectedBottleIndex {
-            if selectedIndex == index {
-                // 点击同一个瓶子，取消选中
-                bottleNodes[selectedIndex].setSelected(false)
-                selectedBottleIndex = nil
-            } else {
-                // 交换瓶子
-                engine.swapBottles(from: selectedIndex, to: index)
-                updateBottlePositions()
-                bottleNodes[selectedIndex].setSelected(false)
-                selectedBottleIndex = nil
-            }
-        } else {
-            // 选中瓶子
-            bottleNodes[index].setSelected(true)
-            selectedBottleIndex = index
+    /// 胜利庆祝动画
+    func runCelebration() {
+        for node in bottleNodes {
+            let pulse = SKAction.sequence([
+                .scale(to: 1.2, duration: 0.15),
+                .scale(to: 1.0, duration: 0.15)
+            ])
+            node.run(.repeat(pulse, count: 3))
         }
-    }
-
-    private func updateBottlePositions() {
-        guard let currentArray = engine.currentArray else { return }
-
-        for (index, bottle) in currentArray.bottles.enumerated() {
-            if let bottleNode = bottleNodes.first(where: { $0.bottleId == bottle.id }) {
-                bottleNode.run(.move(to: boxNode.getSlotPosition(at: index), duration: 0.2))
-            }
-        }
-    }
-
-    func updateScene() {
-        guard let engine = engine else { return }
-        onStateChanged?(engine.state)
     }
 }
