@@ -8,6 +8,8 @@ struct GameView: View {
     @State private var showingSettlement = false
     @State private var settlementState: GameState = .preparing
     @State private var settlementPlayerArray = BottleArray(bottles: [])
+    /// 延迟弹结算 sheet 的任务句柄，便于取消（重开/视图消失时）
+    @State private var settlementTask: Task<Void, Never>?
 #if os(macOS)
     @FocusState private var gameFocused: Bool
 #endif
@@ -47,8 +49,10 @@ struct GameView: View {
                 settlementState = newState
                 settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 scene.runCelebration()
-                Task {
+                settlementTask?.cancel()
+                settlementTask = Task {
                     try? await Task.sleep(for: .seconds(1.2))
+                    guard !Task.isCancelled else { return }
                     showingSettlement = true
                 }
             case .gaveUp:
@@ -77,6 +81,10 @@ struct GameView: View {
                     onExitToMenu()
                 }
             )
+        }
+        .onDisappear {
+            settlementTask?.cancel()
+            settlementTask = nil
         }
 #if os(macOS)
         .focused($gameFocused)

@@ -10,6 +10,8 @@ final class GameScene: SKScene {
     private var bottleNodes: [BottleNode] = []
     /// 上一帧已渲染的瓶子顺序（bottleId 列表），用于 diff 触发移动动画
     private var renderedOrder: [Int] = []
+    /// 上一帧渲染时的引擎状态，用于识别重开局（非 .playing → .playing）
+    private var renderedState: GameState?
 
     func configure(engine: GameEngine) {
         self.engine = engine
@@ -48,6 +50,18 @@ final class GameScene: SKScene {
     /// 每帧 diff 引擎状态：位置变化播放移动动画，选中/标记直接同步
     private func syncWithEngine() {
         guard let engine, let current = engine.currentArray else { return }
+
+        let previousState = renderedState
+        renderedState = engine.state
+
+        // 重开局（从非 .playing 状态回到 .playing）：静默重建场景，
+        // 不播音效、不走 diff 动画路径
+        if case .playing = engine.state,
+           let previousState,
+           previousState != .playing {
+            setupGame()
+            return
+        }
 
         let order = current.bottles.map(\.id)
         if order != renderedOrder {
