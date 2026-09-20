@@ -20,3 +20,6 @@ xcuserdata/
 # Qoder 工具临时输出
 .qoder/better-harness/
 .qoder/repowiki/
+
+# 可视化头脑风暴临时产物
+.superpowers/
