@@ -89,4 +89,77 @@ final class GameEngineTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(correctCount, 0)
         XCTAssertLessThanOrEqual(correctCount, 4)
     }
+
+    func testTapSelectsThenSwaps() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+
+        engine.tap(position: 0)
+        XCTAssertEqual(engine.selectedPosition, 0)
+
+        engine.tap(position: 2)
+        XCTAssertNil(engine.selectedPosition)
+        XCTAssertEqual(engine.currentArray?.bottles[0].id, 2)
+        XCTAssertEqual(engine.currentArray?.bottles[2].id, 0)
+    }
+
+    func testTapSamePositionDeselects() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+
+        engine.tap(position: 1)
+        engine.tap(position: 1)
+        XCTAssertNil(engine.selectedPosition)
+        XCTAssertEqual(engine.currentArray?.bottles.map(\.id), [0, 1, 2, 3])
+    }
+
+    func testTapOutOfRangeIgnored() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+
+        engine.tap(position: -1)
+        engine.tap(position: 4)
+        XCTAssertNil(engine.selectedPosition)
+    }
+
+    func testTapIgnoredWhenNotPlaying() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.tap(position: 0)
+        XCTAssertNil(engine.selectedPosition)
+    }
+
+    func testMarkModeTogglesMarks() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+        engine.isMarkMode = true
+
+        engine.tap(position: 1)
+        XCTAssertEqual(engine.markedPositions, [1])
+        XCTAssertNil(engine.selectedPosition)
+
+        engine.tap(position: 1)
+        XCTAssertEqual(engine.markedPositions, [])
+    }
+
+    func testStartNewGameResetsSelectionAndMarks() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+        engine.isMarkMode = true
+        engine.tap(position: 0)
+        engine.isMarkMode = false
+        engine.tap(position: 1)
+
+        engine.startNewGame()
+        XCTAssertNil(engine.selectedPosition)
+        XCTAssertEqual(engine.markedPositions, [])
+        XCTAssertFalse(engine.isMarkMode)
+    }
+
+    func testGiveUpClearsSelection() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+        engine.tap(position: 0)
+        engine.giveUp()
+        XCTAssertNil(engine.selectedPosition)
+    }
 }
