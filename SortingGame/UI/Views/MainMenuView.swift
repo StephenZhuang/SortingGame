@@ -39,8 +39,7 @@ struct MainMenuView: View {
             DifficultySelectView()
         }
         .sheet(isPresented: $showingLeaderboard) {
-            Text("排行榜（待实现）")
-                .padding()
+            LeaderboardView()
         }
         .sheet(isPresented: $showingSettings) {
             SettingsView()
