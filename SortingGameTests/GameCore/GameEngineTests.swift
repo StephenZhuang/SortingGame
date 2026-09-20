@@ -42,11 +42,26 @@ final class GameEngineTests: XCTestCase {
         }
     }
 
+    func testStartNewGameCurrentArrayIsNaturalOrder() {
+        let engine = GameEngine(bottleCount: 4)
+        engine.startNewGame()
+        XCTAssertEqual(engine.currentArray?.bottles.map(\.id), [0, 1, 2, 3])
+    }
+
+    func testStartNewGameTargetDiffersFromCurrent() {
+        let engine = GameEngine(bottleCount: 4)
+        // 随机生成多次，目标必须始终 != 自然序
+        for _ in 0..<50 {
+            engine.startNewGame()
+            XCTAssertNotEqual(engine.currentArray, engine.targetArray)
+        }
+    }
+
     func testSubmitIncorrectAnswer() {
         let engine = GameEngine(bottleCount: 4)
         engine.startNewGame()
 
-        engine.swapBottles(from: 0, to: 1)
+        // 自然序必然 != 目标排列，直接提交必然错误
         engine.submitGuess()
 
         XCTAssertEqual(engine.state, .playing)

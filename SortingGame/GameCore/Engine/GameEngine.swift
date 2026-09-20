@@ -24,8 +24,13 @@ final class GameEngine {
         let bottles = (0..<bottleCount).map { index in
             Bottle(id: index, colorIndex: index, shapeIndex: index)
         }
-        targetArray = BottleArray(bottles: bottles.shuffled())
-        currentArray = targetArray
+        var target = bottles.shuffled()
+        // 保证目标排列 != 自然序，否则开局即通关
+        if target.map(\.id) == bottles.map(\.id) {
+            target.swapAt(0, 1)
+        }
+        targetArray = BottleArray(bottles: target)
+        currentArray = BottleArray(bottles: bottles)
         scoreCalculator.reset()
         state = .playing
     }
