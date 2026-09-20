@@ -31,8 +31,9 @@ final class GameScene: SKScene {
         boxNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(boxNode)
 
+        let colorblindMode = SettingsService.shared.colorblindMode
         for (index, bottle) in currentArray.bottles.enumerated() {
-            let node = BottleNode(bottle: bottle, size: slotSize)
+            let node = BottleNode(bottle: bottle, size: slotSize, colorblindMode: colorblindMode)
             node.position = boxNode.getSlotPosition(at: index)
             boxNode.addChild(node)
             bottleNodes.append(node)

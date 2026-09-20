@@ -10,7 +10,7 @@ class BottleNode: SKNode {
     private let highlightRing: SKShapeNode
     private let markLabel: SKLabelNode?
 
-    init(bottle: Bottle, size: CGSize) {
+    init(bottle: Bottle, size: CGSize, colorblindMode: Bool) {
         self.bottleId = bottle.id
         self.colorIndex = bottle.colorIndex
         self.shapeIndex = bottle.shapeIndex
@@ -20,6 +20,15 @@ class BottleNode: SKNode {
         bottleBody.strokeColor = .black
         bottleBody.lineWidth = 2
         bottleBody.position = .zero
+
+        // 形状符号（颜色+形状双重区分，色盲友好）
+        let symbol = SKLabelNode(text: Self.shapeSymbols[bottle.shapeIndex % Self.shapeSymbols.count])
+        symbol.fontSize = size.width * (colorblindMode ? 0.55 : 0.4)
+        symbol.fontColor = Self.symbolColor(forBodyColor: Self.colorForIndex(bottle.colorIndex))
+        symbol.horizontalAlignmentMode = .center
+        symbol.verticalAlignmentMode = .center
+        symbol.position = .zero
+        bottleBody.addChild(symbol)
 
         let highlight = SKShapeNode(rectOf: CGSize(width: size.width * 0.2, height: size.height * 0.7))
         highlight.fillColor = .white.withAlphaComponent(0.3)
@@ -63,8 +72,18 @@ class BottleNode: SKNode {
         markLabel?.alpha = marked ? 1 : 0
     }
 
+    private static let shapeSymbols = ["●", "■", "▲", "◆", "★", "⬟", "✚"]
+
     private static func colorForIndex(_ index: Int) -> SKColor {
         let colors: [SKColor] = [.red, .blue, .green, .orange, .purple, .cyan, .yellow]
         return colors[index % colors.count]
+    }
+
+    /// 深色瓶体用白符号，浅色（黄/青）用黑符号，保证对比度
+    private static func symbolColor(forBodyColor color: SKColor) -> SKColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let luminance = 0.299 * red + 0.587 * green + 0.114 * blue
+        return luminance > 0.6 ? .black : .white
     }
 }
