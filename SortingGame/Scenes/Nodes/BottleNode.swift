@@ -10,9 +10,6 @@ class BottleNode: SKNode {
     private let highlightRing: SKShapeNode
     private let markLabel: SKLabelNode?
 
-    private var isMarked = false
-    private var isSelected = false
-
     init(bottle: Bottle, size: CGSize) {
         self.bottleId = bottle.id
         self.colorIndex = bottle.colorIndex
@@ -59,12 +56,10 @@ class BottleNode: SKNode {
     }
 
     func setSelected(_ selected: Bool) {
-        isSelected = selected
         highlightRing.alpha = selected ? 1 : 0
     }
 
     func setMarked(_ marked: Bool) {
-        isMarked = marked
         markLabel?.alpha = marked ? 1 : 0
     }
 

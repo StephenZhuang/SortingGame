@@ -26,6 +26,11 @@ class GameViewModel {
         engine.giveUp()
     }
 
+    func toggleMarkMode() {
+        engine.isMarkMode.toggle()
+        engine.clearSelection()
+    }
+
     private func updateFeedback() {
         if case .playing = engine.state {
             let correctCount = engine.correctPositionCount

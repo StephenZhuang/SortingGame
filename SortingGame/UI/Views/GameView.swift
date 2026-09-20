@@ -2,7 +2,6 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
-    @Environment(\.dismiss) private var dismiss
     @State private var viewModel: GameViewModel
     @State private var scene: GameScene
     private let onExitToMenu: () -> Void
@@ -42,8 +41,7 @@ struct GameView: View {
             .disabled(viewModel.engine.state != .playing)
 
             Button(viewModel.engine.isMarkMode ? "退出标记" : "标记模式") {
-                viewModel.engine.isMarkMode.toggle()
-                viewModel.engine.clearSelection()
+                viewModel.toggleMarkMode()
             }
             .buttonStyle(.bordered)
             .tint(viewModel.engine.isMarkMode ? .green : .accentColor)

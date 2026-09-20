@@ -93,7 +93,7 @@ final class GameScene: SKScene {
         }
     }
 
-    /// 胜利庆祝动画
+    /// 胜利庆祝动画（Task 12 接入调用）
     func runCelebration() {
         for node in bottleNodes {
             let pulse = SKAction.sequence([
