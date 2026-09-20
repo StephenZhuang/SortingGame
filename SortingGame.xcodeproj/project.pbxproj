@@ -46,9 +46,23 @@
 		776727A7305FCB2E00445BE3 /* SortingGame-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SortingGame-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		77A10001305FC75200445B01 /* Exceptions for "SortingGame" folder in "SortingGame-iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SortingGameApp.swift,
+				Assets.xcassets,
+			);
+			target = 77672790305FCB2D00445BE3 /* SortingGame-iOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7767272F305FC75200445BE3 /* SortingGame */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				77A10001305FC75200445B01 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+			);
 			path = SortingGame;
 			sourceTree = "<group>";
 		};
@@ -214,6 +228,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				77672792305FCB2D00445BE3 /* SortingGame-iOS */,
+				7767272F305FC75200445BE3 /* SortingGame */,
 			);
 			name = "SortingGame-iOS";
 			productName = "SortingGame-iOS";
