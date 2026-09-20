@@ -79,11 +79,11 @@ class BottleNode: SKNode {
         return colors[index % colors.count]
     }
 
-    /// 深色瓶体用白符号，浅色（黄/青）用黑符号，保证对比度
+    /// 深色瓶体用白符号，浅色瓶体（黄/青/橙/绿）用黑符号，保证对比度
     private static func symbolColor(forBodyColor color: SKColor) -> SKColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         let luminance = 0.299 * red + 0.587 * green + 0.114 * blue
-        return luminance > 0.6 ? .black : .white
+        return luminance > 0.55 ? .black : .white
     }
 }
