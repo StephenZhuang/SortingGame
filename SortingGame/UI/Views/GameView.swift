@@ -2,8 +2,10 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var viewModel: GameViewModel
     @State private var scene: GameScene
+    @State private var showingSettlement = false
 #if os(macOS)
     @FocusState private var gameFocused: Bool
 #endif
@@ -33,6 +35,32 @@ struct GameView: View {
             buttonBar
         }
         .padding()
+        .onChange(of: viewModel.engine.state) { _, newState in
+            switch newState {
+            case .won, .gaveUp:
+                showingSettlement = true
+            case .preparing, .playing:
+                break
+            }
+        }
+        .sheet(isPresented: $showingSettlement) {
+            SettlementView(
+                state: viewModel.engine.state,
+                playerArray: viewModel.engine.currentArray ?? BottleArray(bottles: []),
+                onPlayAgain: {
+                    showingSettlement = false
+                    viewModel.startNewGame()
+                },
+                onChangeDifficulty: {
+                    showingSettlement = false
+                    dismiss()
+                },
+                onBackToMenu: {
+                    showingSettlement = false
+                    onExitToMenu()
+                }
+            )
+        }
 #if os(macOS)
         .focused($gameFocused)
         .focusable()
