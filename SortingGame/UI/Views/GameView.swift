@@ -1,13 +1,18 @@
 import SwiftUI
 import SpriteKit
 
+/// 结算快照：用 sheet(item:) 在呈现瞬间原子携带数据，规避 iOS 上 isPresented+独立 @State 的时序竞争
+private struct SettlementSnapshot: Identifiable {
+    let id = UUID()
+    let state: GameState
+    let playerArray: BottleArray
+}
+
 struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: GameViewModel
     @State private var scene: GameScene
-    @State private var showingSettlement = false
-    @State private var settlementState: GameState = .preparing
-    @State private var settlementPlayerArray = BottleArray(bottles: [])
+    @State private var settlement: SettlementSnapshot?
 #if os(macOS)
     @FocusState private var gameFocused: Bool
 #endif
@@ -49,35 +54,37 @@ struct GameView: View {
             // 使用 .task(id:) 替代 onChange，确保 @Observable 跨对象属性链变更能被可靠捕获
             switch viewModel.engine.state {
             case .won:
-                settlementState = viewModel.engine.state
-                settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 scene.runCelebration()
                 try? await Task.sleep(for: .seconds(1.2))
                 guard !Task.isCancelled else { return }
-                showingSettlement = true
+                settlement = SettlementSnapshot(
+                    state: viewModel.engine.state,
+                    playerArray: viewModel.engine.currentArray ?? BottleArray(bottles: [])
+                )
             case .gaveUp:
-                settlementState = viewModel.engine.state
-                settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
-                showingSettlement = true
+                settlement = SettlementSnapshot(
+                    state: viewModel.engine.state,
+                    playerArray: viewModel.engine.currentArray ?? BottleArray(bottles: [])
+                )
             case .preparing, .playing:
                 break
             }
         }
-        .sheet(isPresented: $showingSettlement) {
+        .sheet(item: $settlement) { snapshot in
             SettlementView(
-                state: settlementState,
+                state: snapshot.state,
                 bottleCount: viewModel.engine.bottleCount,
-                playerArray: settlementPlayerArray,
+                playerArray: snapshot.playerArray,
                 onPlayAgain: {
-                    showingSettlement = false
+                    settlement = nil
                     viewModel.startNewGame()
                 },
                 onChangeDifficulty: {
-                    showingSettlement = false
+                    settlement = nil
                     dismiss()
                 },
                 onBackToMenu: {
-                    showingSettlement = false
+                    settlement = nil
                     onExitToMenu()
                 }
             )
@@ -90,8 +97,8 @@ struct GameView: View {
             viewModel.handleKey(press.key) ? .handled : .ignored
         }
         .onAppear { gameFocused = true }
-        .onChange(of: showingSettlement) { _, isShowing in
-            if !isShowing {
+        .onChange(of: settlement?.id) { _, newId in
+            if newId == nil {
                 restoreFocus()
             }
         }
