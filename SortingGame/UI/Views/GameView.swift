@@ -35,9 +35,12 @@ struct GameView: View {
             Text(viewModel.feedbackText)
                 .font(.title2)
                 .fontWeight(.semibold)
-                .id(viewModel.feedbackText)
-                .transition(.scale.combined(with: .opacity))
-                .animation(.spring(duration: 0.3), value: viewModel.feedbackText)
+                // 以提交次数为触发器：即使"对了 x 个"数值不变，每次提交也会重放放大缩小动画
+                .phaseAnimator([1.0, 1.3, 1.0], trigger: viewModel.engine.scoreCalculator.attemptCount) { text, scale in
+                    text.scaleEffect(scale)
+                } animation: { scale in
+                    scale > 1.0 ? .easeOut(duration: 0.12) : .spring(duration: 0.3)
+                }
 
             buttonBar
         }

@@ -54,9 +54,14 @@ class GameViewModel {
 #endif
 
     private func updateFeedback() {
-        if case .playing = engine.state {
+        // 全对时也先刷新反馈文案（配合动画提示提交结果），再进入结算
+        switch engine.state {
+        case .playing, .won:
+            let attempts = engine.scoreCalculator.attemptCount
             let correctCount = engine.correctPositionCount
-            feedbackText = "对了 \(correctCount) 个"
+            feedbackText = "第 \(attempts) 次提交 · 对了 \(correctCount) 个"
+        case .preparing, .gaveUp:
+            break
         }
     }
 }
