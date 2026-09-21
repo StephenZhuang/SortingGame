@@ -8,7 +8,7 @@ struct MainMenuView: View {
 
     var body: some View {
         VStack(spacing: 30) {
-            Text("SortingGame")
+            Text("猜瓶子")
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
@@ -55,7 +55,7 @@ struct AboutView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("关于 SortingGame")
+            Text("关于猜瓶子")
                 .font(.title)
                 .bold()
             Text("系统随机生成一组瓶子的隐藏排列，你通过交换瓶子来推理还原正确顺序。")
