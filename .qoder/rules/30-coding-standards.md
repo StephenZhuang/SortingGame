@@ -38,9 +38,11 @@ globs: "*.swift"
 
 ## 编辑后验证（必须执行）
 
-每次编辑后运行对应最小验证命令，通过后再继续下一轮编辑（scheme/destination 名以工程实际为准，接手时回填）：
+每次编辑后运行对应最小验证命令，通过后再继续下一轮编辑（scheme/destination 以工程实际为准，2026-09-21 实证可用）：
 
 - **编译（macOS）**：`xcodebuild -scheme SortingGame -destination 'platform=macOS' build`
-- **编译（iOS 模拟器）**：`xcodebuild -scheme SortingGame -destination 'platform=iOS Simulator,name=iPhone 15' build`
-- **单元测试**：`xcodebuild -scheme SortingGame -destination 'platform=macOS' test`
+- **编译（iOS 模拟器）**：`xcodebuild -scheme SortingGame-iOS -destination 'generic/platform=iOS Simulator' build`
+- **单元测试（只跑 GameCore 纯逻辑测试，不触发 UI 测试）**：
+  `xcodebuild -scheme SortingGame -destination 'platform=macOS' test -only-testing:SortingGameTests/BottleArrayTests -only-testing:SortingGameTests/BottleTests -only-testing:SortingGameTests/GameEngineTests -only-testing:SortingGameTests/ScoreCalculatorTests`
+- **禁止默认执行全量 `test`**：会连带运行 `SortingGameUITests`，拉起模拟器/App 界面自动操作，占用用户屏幕；UI 测试仅在用户明确要求时运行
 - 验证失败先定位修复，再继续后续编辑
