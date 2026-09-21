@@ -15,6 +15,10 @@ final class GameScene: SKScene {
 
     func configure(engine: GameEngine) {
         self.engine = engine
+        // 如果引擎已有数据，立即尝试初始化（兜底 didMove(to:) 未调用的情况）
+        if engine.currentArray != nil {
+            setupGame()
+        }
     }
 
     override func didMove(to view: SKView) {
@@ -50,6 +54,12 @@ final class GameScene: SKScene {
     /// 每帧 diff 引擎状态：位置变化播放移动动画，选中/标记直接同步
     private func syncWithEngine() {
         guard let engine, let current = engine.currentArray else { return }
+
+        // 兜底：didMove(to:) 未调用或当时 currentArray 为 nil 时，延迟初始化
+        if boxNode == nil {
+            setupGame()
+            return
+        }
 
         let previousState = renderedState
         renderedState = engine.state

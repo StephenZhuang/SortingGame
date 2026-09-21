@@ -1,9 +1,14 @@
 import SwiftUI
 
+/// sheet(item:) 的载体：呈现时把点击的瓶子数量直接传入，避免 isPresented+State 的时序竞争
+private struct GameLaunch: Identifiable {
+    let count: Int
+    var id: Int { count }
+}
+
 struct DifficultySelectView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showingGame = false
-    @State private var selectedBottleCount = 4
+    @State private var launch: GameLaunch?
 
     var body: some View {
         VStack(spacing: 30) {
@@ -24,9 +29,9 @@ struct DifficultySelectView: View {
             .buttonStyle(.bordered)
         }
         .padding()
-        .sheet(isPresented: $showingGame) {
-            GameView(bottleCount: selectedBottleCount, onExitToMenu: {
-                showingGame = false
+        .sheet(item: $launch) { game in
+            GameView(bottleCount: game.count, onExitToMenu: {
+                launch = nil
                 dismiss()
             })
         }
@@ -34,8 +39,7 @@ struct DifficultySelectView: View {
 
     private func difficultyButton(count: Int, label: String) -> some View {
         Button(label) {
-            selectedBottleCount = count
-            showingGame = true
+            launch = GameLaunch(count: count)
         }
         .buttonStyle(.borderedProminent)
         .frame(minWidth: 200)

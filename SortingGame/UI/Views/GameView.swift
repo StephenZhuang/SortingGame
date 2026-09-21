@@ -8,8 +8,6 @@ struct GameView: View {
     @State private var showingSettlement = false
     @State private var settlementState: GameState = .preparing
     @State private var settlementPlayerArray = BottleArray(bottles: [])
-    /// 延迟弹结算 sheet 的任务句柄，便于取消（重开/视图消失时）
-    @State private var settlementTask: Task<Void, Never>?
 #if os(macOS)
     @FocusState private var gameFocused: Bool
 #endif
@@ -30,7 +28,9 @@ struct GameView: View {
     var body: some View {
         VStack(spacing: 20) {
             SpriteView(scene: scene)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                // macOS sheet 按内容自适应尺寸，SpriteView 无 intrinsic size，
+                // 必须给最小/理想高度，否则被压成 0 高看不见瓶子
+                .frame(maxWidth: .infinity, minHeight: 300, idealHeight: 480, maxHeight: .infinity)
 
             Text(viewModel.feedbackText)
                 .font(.title2)
@@ -42,21 +42,18 @@ struct GameView: View {
             buttonBar
         }
         .padding()
-        .onChange(of: viewModel.engine.state) { _, newState in
-            switch newState {
+        .task(id: viewModel.engine.state) {
+            // 使用 .task(id:) 替代 onChange，确保 @Observable 跨对象属性链变更能被可靠捕获
+            switch viewModel.engine.state {
             case .won:
-                // 先捕获快照，避免 sheet 活读引擎状态导致闪现
-                settlementState = newState
+                settlementState = viewModel.engine.state
                 settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 scene.runCelebration()
-                settlementTask?.cancel()
-                settlementTask = Task {
-                    try? await Task.sleep(for: .seconds(1.2))
-                    guard !Task.isCancelled else { return }
-                    showingSettlement = true
-                }
+                try? await Task.sleep(for: .seconds(1.2))
+                guard !Task.isCancelled else { return }
+                showingSettlement = true
             case .gaveUp:
-                settlementState = newState
+                settlementState = viewModel.engine.state
                 settlementPlayerArray = viewModel.engine.currentArray ?? BottleArray(bottles: [])
                 showingSettlement = true
             case .preparing, .playing:
@@ -81,10 +78,6 @@ struct GameView: View {
                     onExitToMenu()
                 }
             )
-        }
-        .onDisappear {
-            settlementTask?.cancel()
-            settlementTask = nil
         }
 #if os(macOS)
         .focused($gameFocused)
