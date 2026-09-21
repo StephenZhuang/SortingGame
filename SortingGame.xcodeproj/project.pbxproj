@@ -50,8 +50,8 @@
 		77A10001305FC75200445B01 /* Exceptions for "SortingGame" folder in "SortingGame-iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				SortingGameApp.swift,
 				Assets.xcassets,
+				SortingGameApp.swift,
 			);
 			target = 77672790305FCB2D00445BE3 /* SortingGame-iOS */;
 		};
@@ -61,7 +61,7 @@
 		7767272F305FC75200445BE3 /* SortingGame */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				77A10001305FC75200445B01 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				77A10001305FC75200445B01 /* Exceptions for "SortingGame" folder in "SortingGame-iOS" target */,
 			);
 			path = SortingGame;
 			sourceTree = "<group>";
@@ -227,8 +227,8 @@
 			buildRules = (
 			);
 			fileSystemSynchronizedGroups = (
-				77672792305FCB2D00445BE3 /* SortingGame-iOS */,
 				7767272F305FC75200445BE3 /* SortingGame */,
+				77672792305FCB2D00445BE3 /* SortingGame-iOS */,
 			);
 			name = "SortingGame-iOS";
 			productName = "SortingGame-iOS";
@@ -703,7 +703,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -737,7 +737,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
