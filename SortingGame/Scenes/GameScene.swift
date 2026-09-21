@@ -32,14 +32,18 @@ final class GameScene: SKScene {
         renderedOrder = []
         guard let engine, let currentArray = engine.currentArray else { return }
 
-        let slotSize = CGSize(width: 80, height: 120)
+        // 格子放大一倍（160x240），瓶子保持 80x120，使瓶子与格子边缘留出间距；
+        // 瓶数较多时按场景宽度收缩格子，避免盒子超出画面
+        let bottleSize = CGSize(width: 80, height: 120)
+        let maxSlotWidth = (size.width - 40) / CGFloat(currentArray.count)
+        let slotSize = CGSize(width: min(160, maxSlotWidth), height: 240)
         boxNode = BoxNode(slotCount: currentArray.count, slotSize: slotSize)
         boxNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(boxNode)
 
         let colorblindMode = SettingsService.shared.colorblindMode
         for (index, bottle) in currentArray.bottles.enumerated() {
-            let node = BottleNode(bottle: bottle, size: slotSize, colorblindMode: colorblindMode)
+            let node = BottleNode(bottle: bottle, size: bottleSize, colorblindMode: colorblindMode)
             node.position = boxNode.getSlotPosition(at: index)
             boxNode.addChild(node)
             bottleNodes.append(node)
